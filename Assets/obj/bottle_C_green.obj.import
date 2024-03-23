@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvnw22354xr6l"
+path="res://.godot/imported/bottle_C_green.obj-fc8bc1c492fa0ff037151887c224e677.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bottle_C_green.obj-fc8bc1c492fa0ff037151887c224e677.mesh"]
+
+source_file="res://Assets/obj/bottle_C_green.obj"
+dest_files=["res://.godot/imported/bottle_C_green.obj-fc8bc1c492fa0ff037151887c224e677.mesh", "res://.godot/imported/bottle_C_green.obj-fc8bc1c492fa0ff037151887c224e677.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
