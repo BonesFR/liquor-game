@@ -1,0 +1,6 @@
+res://main.tscn
+res://player.tscn
+res://Player.gd
+res://InterractRaycast.gd
+res://Interactable.gd
+res://bottle.tscn

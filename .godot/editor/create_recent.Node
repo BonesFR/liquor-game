@@ -1,0 +1,9 @@
+MeshInstance3D
+RigidBody3D
+RayCast3D
+TextureRect
+Marker2D
+Node2D
+Camera3D
+Node3D
+DirectionalLight3D
