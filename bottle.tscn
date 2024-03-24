@@ -1,103 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://byem102ew3fpe"]
+[gd_scene load_steps=4 format=3 uid="uid://b5vuunticcejl"]
 
-[ext_resource type="Script" path="res://BottleScript.gd" id="1_wqghp"]
-[ext_resource type="PackedScene" uid="uid://b5hxi2dbflmxp" path="res://bottle_model.tscn" id="2_66ge3"]
-[ext_resource type="Script" path="res://pivot.gd" id="2_x8gvu"]
-[ext_resource type="Script" path="res://Guide.gd" id="3_xgqcv"]
-[ext_resource type="AudioStream" uid="uid://0sm2djuxxwub" path="res://open.wav" id="5_kh7su"]
+[ext_resource type="Script" path="res://Interactable.gd" id="1_6sqth"]
+[ext_resource type="ArrayMesh" uid="uid://c7j0jfr0mv810" path="res://Assets/obj/bottle_A_brown.obj" id="2_4hlqy"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17unx"]
-transparency = 1
-blend_mode = 1
-vertex_color_use_as_albedo = true
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uq0w6"]
+points = PackedVector3Array(0.103975, 0.864546, 0.0336759, -0.179328, 0.100265, 0.0183098, -0.179658, 0.0996295, 0.0447587, 0.178187, 0.0969283, -0.0479953, -0.0457705, 0.379511, -0.172477, 0.0569236, 0.105547, 0.173712, -0.0928031, 0.87855, 0.047758, 0.047758, 0.87855, -0.0928031, -0.0345697, 0.0183295, -0.140701, -0.12093, 0.751988, -0.050631, 0.146147, 0.077345, 0.146147, -0.050631, 0.766168, 0.118057, 0.131646, 0.227384, -0.134519, -0.127924, 0.096548, 0.138393, -0.135736, 0.123068, -0.135736, 0.047758, 0.850542, 0.103975, -0.114143, 0.0185221, 0.0847408, 0.0992056, 0.013326, -0.102079, 0.167109, 0.393028, -0.0451238, -0.0365489, 0.850542, -0.106848, 0.00489361, 0.354251, 0.169644, -0.00790588, 0.106133, -0.176281, -0.168496, 0.393467, 0.0418654, 0.0447398, 0.0205722, 0.137092, -0.134414, 0.354287, -0.121726, -0.119055, 0.393422, 0.128589, 0.118057, 0.766168, -0.050631, 0.131883, 0.341251, 0.131883, 0.047758, 0.751988, -0.12093, -0.101851, 0.0142953, -0.101851, 0.169878, 0.37941, -0.00777526, 0.12358, 0.100574, -0.139641)
 
-[sub_resource type="Curve" id="Curve_3wrx5"]
-_data = [Vector2(0.0289855, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[node name="RigidBody3D" type="RigidBody3D"]
+script = ExtResource("1_6sqth")
 
-[sub_resource type="CurveTexture" id="CurveTexture_l1aiw"]
-curve = SubResource("Curve_3wrx5")
-
-[sub_resource type="Gradient" id="Gradient_kcol0"]
-offsets = PackedFloat32Array(0.0181818, 0.490909, 1)
-colors = PackedColorArray(0, 0.23595, 0.290989, 1, 0, 0.593778, 0.716508, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ddj4k"]
-gradient = SubResource("Gradient_kcol0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6cavf"]
-lifetime_randomness = 0.39
-emission_shape = 1
-emission_sphere_radius = 0.05
-direction = Vector3(1, 1, 0)
-spread = 86.747
-scale_min = 0.01
-scale_max = 0.05
-color_ramp = SubResource("GradientTexture1D_ddj4k")
-alpha_curve = SubResource("CurveTexture_l1aiw")
-turbulence_noise_strength = 0.0
-turbulence_noise_scale = 0.0
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.078
-
-[sub_resource type="SphereMesh" id="SphereMesh_ao6dh"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lfv82"]
-radius = 0.05
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyh7v"]
-transparency = 1
-blend_mode = 1
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ol1eb"]
-radius = 0.02
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_t00nb"]
-height = 1.065
-radius = 0.17
-
-[node name="Bottle" type="RigidBody3D" groups=["Bottle", "Holdable"]]
-mass = 10.87
-script = ExtResource("1_wqghp")
-metadata/quantity = 2.0
-metadata/Spilling = false
-metadata/Open = false
-metadata/Type = ""
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397132, 0)
-material_override = SubResource("StandardMaterial3D_17unx")
-amount = 35
-process_material = SubResource("ParticleProcessMaterial_6cavf")
-draw_pass_1 = SubResource("SphereMesh_ao6dh")
-
-[node name="Bottle" parent="." instance=ExtResource("2_66ge3")]
-transform = Transform3D(0.465, 0, 0, 0, 0.465, 0, 0, 0, 0.465, 0, -0.19, 0)
-
-[node name="Node3D" type="Node3D" parent="Bottle"]
-transform = Transform3D(2.15054, 0, 0, 0, 2.15054, 0, 0, 0, 2.15054, 0, 1.261, 0)
-script = ExtResource("2_x8gvu")
-
-[node name="Area3D" type="Area3D" parent="Bottle/Node3D"]
-script = ExtResource("3_xgqcv")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bottle/Node3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.979132, 0)
-shape = SubResource("CapsuleShape3D_lfv82")
-
-[node name="Guide" type="MeshInstance3D" parent="Bottle/Node3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.986223, 0)
-material_override = SubResource("StandardMaterial3D_iyh7v")
-mesh = SubResource("CapsuleMesh_ol1eb")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_4hlqy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.465, 0, 0, 0, 0.465, 0, 0, 0, 0.465, -0.00307351, 0.0807935, 0.00236988)
-shape = SubResource("CylinderShape3D_t00nb")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393198, 0)
-stream = ExtResource("5_kh7su")
-
-[connection signal="body_entered" from="Bottle/Node3D/Area3D" to="Bottle/Node3D/Area3D" method="_on_body_entered"]
-[connection signal="body_exited" from="Bottle/Node3D/Area3D" to="Bottle/Node3D/Area3D" method="_on_body_exited"]
+shape = SubResource("ConvexPolygonShape3D_uq0w6")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqq6f20iavd82"]
+
+[ext_resource type="PackedScene" uid="uid://gh63gls7w0qx" path="res://detailed_draft__bar_counter.glb" id="1_a3cex"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ckdm6"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_a3cex")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model" index="1"]
+transform = Transform3D(-0.0510467, -2.24942, 0, 2.24942, -0.0510467, 0, 0, 0, 2.25, -2.24685, -0.843594, 0.382909)
+shape = SubResource("CapsuleShape3D_ckdm6")
