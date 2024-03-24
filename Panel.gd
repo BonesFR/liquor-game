@@ -35,7 +35,8 @@ func _on_button_pressed():
 		var bottle = bottle_scene.instantiate()
 		add_child(bottle)
 		bottle.set_meta("Type", Global.DrinkList.keys()[0])
-		bottle.position.y =  bottle.position.y + 5
+		bottle.position.y =  owner.position.y + 1
+		bottle.position.x =  owner.position.x + 1
 
 
 func _on_button_2_pressed():
@@ -45,7 +46,8 @@ func _on_button_2_pressed():
 		var bottle = bottle_scene.instantiate()
 		add_child(bottle)
 		bottle.set_meta("Type", Global.DrinkList.keys()[1])
-		bottle.position.y =  bottle.position.y + 5
+		bottle.position.y =  owner.position.y + 1
+		bottle.position.x =  owner.position.x + 1
 
 
 func _on_button_3_pressed():
@@ -55,7 +57,8 @@ func _on_button_3_pressed():
 		var bottle = bottle_scene.instantiate()
 		add_child(bottle)
 		bottle.set_meta("Type", Global.DrinkList.keys()[2])
-		bottle.position.y =  bottle.position.y + 5
+		bottle.position.y =  owner.position.y + 1
+		bottle.position.x =  owner.position.x + 1
 
 
 func _on_button_4_pressed():
@@ -65,7 +68,8 @@ func _on_button_4_pressed():
 		var bottle = bottle_scene.instantiate()
 		add_child(bottle)
 		bottle.set_meta("Type", Global.DrinkList.keys()[3])
-		bottle.position.y =  bottle.position.y + 5
+		bottle.position.y =  owner.position.y + 1
+		bottle.position.x =  owner.position.x + 1
 
 
 func _on_button_5_pressed():
@@ -75,4 +79,5 @@ func _on_button_5_pressed():
 		var bottle = bottle_scene.instantiate()
 		add_child(bottle)
 		bottle.set_meta("Type", Global.DrinkList.keys()[4])
-		bottle.position.y =  bottle.position.y + 5
+		bottle.position.y =  owner.position.y + 1
+		bottle.position.x =  owner.position.x + 1

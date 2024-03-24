@@ -15,4 +15,5 @@ func _on_control_query_done():
 	var glass_scene = load("res://glass.tscn")
 	var glass = glass_scene.instantiate()
 	add_child(glass)
-	glass.position.y =  glass.position.y + 5
+	glass.position.y =  $Sketchfab_Scene.position.y + 0.1
+	glass.position.x =  $Sketchfab_Scene.position.x + 0.1
