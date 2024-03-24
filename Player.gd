@@ -5,6 +5,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 var speed := 1200.0
 var interact_range := 1000.0
+var Money = 100.0
 
 @onready var twist_pivot := $TwistPivot
 @onready var pitch_pivot := $TwistPivot/PitchPivot
@@ -35,9 +36,10 @@ func handle_movement(delta):
 # La fonction est appelée toute les frames. Delta c'est le temps entre chaque frame
 func _process(delta):
 	handle_movement(delta)
+	$TwistPivot/PitchPivot/Camera3D/MoneyLabel.text = str(Global.Money)
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion && !Input.is_action_pressed("rotate"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -event.relative.x * mouse_sensitivity
 			pitch_input = -event.relative.y * mouse_sensitivity

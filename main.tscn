@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5xxbpykupmge"]
+[gd_scene load_steps=12 format=3 uid="uid://b5xxbpykupmge"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_hufc0"]
 [ext_resource type="PackedScene" uid="uid://cy8fsxhxfik3e" path="res://player.tscn" id="1_sy16w"]
-[ext_resource type="PackedScene" uid="uid://b5vuunticcejl" path="res://bottle.tscn" id="2_78l0w"]
+[ext_resource type="Script" path="res://Control.gd" id="4_rfwrr"]
+[ext_resource type="PackedScene" uid="uid://dhcylvl2oin80" path="res://computer.tscn" id="4_umobd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aq4vf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,6 +30,7 @@ albedo_texture = SubResource("ImageTexture_2w3nh")
 data = PackedVector3Array(125, 0, 125, -125, 0, 125, 125, 0, -125, -125, 0, 125, -125, 0, -125, 125, 0, -125)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_hufc0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ppgxb")
@@ -46,9 +49,21 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dgqnn")
 shape = SubResource("ConcavePolygonShape3D_31ag3")
 
 [node name="Player" parent="." instance=ExtResource("1_sy16w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.183, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8846, 1.183, -2)
 top_level = true
 linear_damp = 3.0
 
-[node name="Bottle" parent="." instance=ExtResource("2_78l0w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.519209, -4.76837e-07, 3.15967)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_rfwrr")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Control"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("4_umobd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.2409, 0.397311, -5.68322)
+
+[connection signal="QueryDone" from="Control" to="." method="_on_control_query_done"]
+[connection signal="request_completed" from="Control/HTTPRequest" to="Control" method="_on_http_request_request_completed"]

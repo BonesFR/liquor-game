@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://ccqhax6pkxsny"]
+
+[ext_resource type="Script" path="res://glass.gd" id="1_tbpv2"]
+[ext_resource type="Texture2D" uid="uid://b8q8xmb6syp7s" path="res://pngimg.com - dollar_sign_PNG44.png" id="2_xpurv"]
+[ext_resource type="PackedScene" uid="uid://bl4oee0wit2mh" path="res://glass.glb" id="3_1ultg"]
+[ext_resource type="AudioStream" uid="uid://cngwv2wok1ixb" path="res://glug-glug-37131.mp3" id="4_ewxgt"]
+[ext_resource type="AudioStream" uid="uid://dd6xd2iobhqaf" path="res://cash-register-kaching-sound-effect-125042.mp3" id="5_8u7ew"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88mm3"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 1, 0, 1)
+albedo_texture = ExtResource("2_xpurv")
+billboard_mode = 1
+
+[sub_resource type="Curve" id="Curve_wypq7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7glad"]
+curve = SubResource("Curve_wypq7")
+
+[sub_resource type="Curve" id="Curve_1baby"]
+max_value = 3.0
+_data = [Vector2(0, 1.12088), 0.0, 0.0, 0, 0, Vector2(0.956522, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d8mm4"]
+curve = SubResource("Curve_1baby")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ek85s"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+spread = 180.0
+initial_velocity_min = 0.1
+initial_velocity_max = 10.0
+angular_velocity_min = 8.7
+angular_velocity_max = 720.0
+scale_min = 0.1
+scale_over_velocity_max = 252.44
+scale_over_velocity_curve = SubResource("CurveTexture_d8mm4")
+color = Color(0, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_7glad")
+
+[sub_resource type="QuadMesh" id="QuadMesh_byqbb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lqk8f"]
+height = 1.27124
+radius = 0.556812
+
+[node name="glass" type="RigidBody3D" groups=["Glass"]]
+script = ExtResource("1_tbpv2")
+metadata/Filling = false
+metadata/Done = false
+metadata/Quantity = 0.0
+metadata/Type = ""
+metadata/FillingType = ""
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_88mm3")
+emitting = false
+amount = 50
+explosiveness = 0.31
+visibility_aabb = AABB(-1.64651, -2.17823, -2.08134, 3.29302, 4.35646, 4.16267)
+process_material = SubResource("ParticleProcessMaterial_ek85s")
+draw_pass_1 = SubResource("QuadMesh_byqbb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="glass" parent="." instance=ExtResource("3_1ultg")]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_lqk8f")
+
+[node name="Glug" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ewxgt")
+
+[node name="Caching" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_8u7ew")
+volume_db = 42.667
+
+[node name="AngryTimer" type="Timer" parent="."]
+wait_time = 150.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AngryTimer" to="." method="_on_angry_timer_timeout"]

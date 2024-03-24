@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5hxi2dbflmxp"]
+
+[ext_resource type="PackedScene" uid="uid://o10koje52wdj" path="res://bottle_of_wine.glb" id="1_vra04"]
+[ext_resource type="PackedScene" uid="uid://cy1s6aenhnwhf" path="res://open_bottle.glb" id="2_arc8v"]
+[ext_resource type="Script" path="res://bottle_model.gd" id="2_q6auv"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_vra04")]
+script = ExtResource("2_q6auv")
+
+[node name="open_bottle" parent="." index="1" instance=ExtResource("2_arc8v")]
+visible = false
